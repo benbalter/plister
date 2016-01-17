@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/plister'
+
+preferences = Plister.preferences(ARGV[0])
+
+puts "Using preference file #{preferences.path}"
+puts "Found preferences for #{preferences.domains.count} applications"
+
+preferences.set!(verbose: true)
+
+puts 'Preferences set!'
