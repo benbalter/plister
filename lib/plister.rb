@@ -3,8 +3,8 @@ require 'deep_merge'
 require 'yaml'
 
 require_relative 'plister/version'
-require_relative './plister/plist'
-require_relative './plister/preferences'
+require_relative 'plister/plist'
+require_relative 'plister/preferences'
 
 module Plister
   class << self

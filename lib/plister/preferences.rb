@@ -6,14 +6,6 @@ module Plister
       @path = path || "/Users/#{Plister.user}/.osx.yml"
     end
 
-    def [](key)
-      data[key]
-    end
-
-    def []=(key, value)
-      data[key] = value
-    end
-
     def set!(verbose: false)
       data.each do |type, domains|
         domains.each do |domain, prefs|

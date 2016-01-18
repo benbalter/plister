@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Ben Balter']
   spec.email         = ['ben.balter@github.com']
 
-  spec.summary       = 'TODO: Write a short summary, because Rubygems requires one.'
+  spec.summary       = 'A utility for programmatically setting OS X plist file preferences'
   spec.homepage      = 'https://github.com/benbalter/plister'
   spec.license       = 'MIT'
 
