@@ -1,4 +1,4 @@
-require 'CFPropertyList'
+require 'cfpropertylist'
 require 'deep_merge'
 require 'yaml'
 
