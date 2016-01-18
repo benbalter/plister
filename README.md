@@ -6,7 +6,9 @@
 
 ## What it does
 
-Most dotfile setups have a string of cryptic `defaults write com.apple...`-type commands. Plister simplifies that process by allowing you to store your OS X preferences in a single YAML file (likely in your home directory or within your dotfiles repostiory), and exposes a single `plister` command line tool to set your saved preferences. See [@benbalter's dotfiles for an example](https://github.com/benbalter/dotfiles/blob/master/.osx.yml).
+Most dotfile setups have a string of cryptic `defaults write com.apple...`-type commands. Plister simplifies that process by allowing you to store your OS X preferences in a single YAML file (likely in your home directory or within your dotfiles repostiory), and exposes a single `plister` command line tool to set your saved preferences.
+
+See [@benbalter's dotfiles for an example](https://github.com/benbalter/dotfiles/blob/master/.osx.yml).
 
 ## Usage
 
