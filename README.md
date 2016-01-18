@@ -2,6 +2,8 @@
 
 *A utility for programmatically setting OS X plist file preferences*
 
+[![Build Status](https://travis-ci.org/benbalter/plister.svg?branch=master)](https://travis-ci.org/benbalter/plister)
+
 ## What it does
 
 Most dotfile setups have a string of cryptic `defaults write com.apple...`-type commands. Plister simplifies that process by allowing you to store your OS X preferences in a single YAML file (likily in your home directory or within your dotfiles repostiory), and exposes a single `plister` command line tool to set your saved preferences.
