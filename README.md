@@ -87,3 +87,13 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 sudo defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 default write -currentHost com.apple.ScreenSaver.iLifeSlideShows styleKey VintagePrints
 ```
+
+## Not writable errors
+
+If you get an error that looks like:
+
+```
+/Library/Preferences/[DOMAIN].plist is not writable by [USER] (IOError)
+```
+
+You'll need to preface the `plister` command with `sudo` so that Ruby can write the system-wide preference.
