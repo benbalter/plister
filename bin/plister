@@ -4,7 +4,7 @@ require 'slop'
 require_relative '../lib/plister'
 
 opts = Slop.parse do |o|
-  o.banner = "usage: plister [file] [options]"
+  o.banner = 'usage: plister [file] [options]'
   o.bool '-h', '--help',    'display usage information'
   o.bool '-d', '--dump',    'dump preferences to YAML'
   o.bool '-s', '--stdout',  'dump preferences to STDOUT'
@@ -13,7 +13,6 @@ opts = Slop.parse do |o|
     exit
   end
 end
-
 
 if opts.help?
   puts opts

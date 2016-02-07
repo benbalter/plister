@@ -14,7 +14,7 @@ module Plister
     rescue CFFormatError
       {}
     end
-    alias_method :to_h, :preferences
+    alias to_h preferences
 
     def preferences=(prefs)
       list.value = CFPropertyList.guess(prefs, convert_unknown_to_string: true)
@@ -29,6 +29,18 @@ module Plister
     def write
       raise IOError, "#{path} is not writable by #{Plister.user}" unless writable?
       list.save
+    end
+
+    def exists?
+      File.exist?(path)
+    end
+
+    def writable?
+      File.writable?(path)
+    end
+
+    def readable?
+      File.readable?(path)
     end
 
     private
@@ -50,18 +62,6 @@ module Plister
       raise IOError, "#{path} does not exist" unless exists?
       raise IOError, "#{path} is not readable by #{Plister.user}" unless readable?
       @list ||= CFPropertyList::List.new file: path
-    end
-
-    def exists?
-      File.exist?(path)
-    end
-
-    def writable?
-      File.writable?(path)
-    end
-
-    def readable?
-      File.readable?(path)
     end
 
     def valid_type?

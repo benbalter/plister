@@ -1,6 +1,5 @@
 module Plister
   class Exporter
-
     attr_reader :path
 
     def initialize(path = nil)
@@ -34,6 +33,7 @@ module Plister
         output = {}
         paths.each do |type, plist_paths|
           plists = plist_paths.map { |domain| Plist.new domain, type: type }
+          plists.select!(&:readable?)
           output[type.to_s] = plists.map { |p| [p.domain, p.to_h] }.to_h
         end
         output
