@@ -4,14 +4,17 @@ module Plister
     TYPES = %w(user system host).freeze
 
     def initialize(domain, type: 'user')
-      @domain = domain
+      @domain = normalize_domain(domain)
       @type   = type.to_s
-      fail ArgumentError, 'Invalid type' unless valid_type?
+      raise ArgumentError, 'Invalid type' unless valid_type?
     end
 
     def preferences
       @preferences ||= CFPropertyList.native_types(list.value)
+    rescue CFFormatError
+      {}
     end
+    alias to_h preferences
 
     def preferences=(prefs)
       list.value = CFPropertyList.guess(prefs, convert_unknown_to_string: true)
@@ -24,8 +27,20 @@ module Plister
     end
 
     def write
-      fail IOError, "#{path} is not writable by #{Plister.user}" unless writable?
+      raise IOError, "#{path} is not writable by #{Plister.user}" unless writable?
       list.save
+    end
+
+    def exists?
+      File.exist?(path)
+    end
+
+    def writable?
+      File.writable?(path)
+    end
+
+    def readable?
+      File.readable?(path)
     end
 
     private
@@ -44,25 +59,20 @@ module Plister
     end
 
     def list
-      fail IOError, "#{path} does not exist" unless exists?
-      fail IOError, "#{path} is not readable by #{Plister.user}" unless readable?
+      raise IOError, "#{path} does not exist" unless exists?
+      raise IOError, "#{path} is not readable by #{Plister.user}" unless readable?
       @list ||= CFPropertyList::List.new file: path
-    end
-
-    def exists?
-      File.exist?(path)
-    end
-
-    def writable?
-      File.writable?(path)
-    end
-
-    def readable?
-      File.readable?(path)
     end
 
     def valid_type?
       TYPES.include?(type)
+    end
+
+    def normalize_domain(domain)
+      domain = File.basename(domain)
+      domain = domain.sub(/\.plist\z/, '')
+      domain = domain.sub(/\.#{Plister.uuid}\z/, '')
+      domain
     end
   end
 end

@@ -1,10 +1,11 @@
 require 'cfpropertylist'
 require 'deep_merge'
-require 'yaml'
+require 'psych'
 
 require_relative 'plister/version'
 require_relative 'plister/plist'
 require_relative 'plister/preferences'
+require_relative 'plister/exporter'
 
 module Plister
   class << self
@@ -13,7 +14,11 @@ module Plister
     end
 
     def user
-      @user ||= `logname`.strip
+      @user ||= begin
+        user = `whoami`.strip
+        return user unless user == 'root'
+        `logname`.strip
+      end
     end
 
     def uuid

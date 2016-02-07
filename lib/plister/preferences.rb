@@ -24,7 +24,7 @@ module Plister
     private
 
     def data
-      @data ||= YAML.load(contents)
+      @data ||= Psych.load(contents)
     end
 
     def contents
