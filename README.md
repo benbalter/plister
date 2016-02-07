@@ -18,7 +18,7 @@ See [@benbalter's dotfiles for an example](https://github.com/benbalter/dotfiles
 
 ### The command line tool
 
-`$ plister [path-to-your-preferences.yml]`
+`$ plister [path-to-your-preferences.yml] [options]`
 
 If no preference file is passed, Plister will default to `~/.osx.yml`.
 
@@ -27,6 +27,10 @@ If no preference file is passed, Plister will default to `~/.osx.yml`.
 1. Create a file in your home directory called `.osx.yml` (or symlink it from elsewhere)
 .
 2. Add your OS X preferences to the `.osx.yml` file, following the instructions below.
+
+### Dumping existing preferences
+
+To dump all your existing preferences, run `plister [path-to-your-preferences.yml] --dump`. This will output all your existing preferences as a YAML file at the specified path, defaulting to `~/.osx.yml` if none is given. You can also pass the `--stdout` flag to dump preferences to STDOUT.
 
 ### Describing preferences
 
