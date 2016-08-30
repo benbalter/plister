@@ -24,7 +24,7 @@ module Plister
     private
 
     def data
-      @data ||= Psych.load(contents)
+      @data ||= Psych.load(contents) || {}
     end
 
     def contents

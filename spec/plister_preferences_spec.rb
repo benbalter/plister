@@ -49,4 +49,11 @@ describe Plister::Preferences do
       end
     end
   end
+
+  context 'with an empty preferene file' do
+    it "Doesn't blow up" do
+      subject.instance_variable_set('@contents', '')
+      expect(subject.domains).to eql([])
+    end
+  end
 end
