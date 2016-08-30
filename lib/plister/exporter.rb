@@ -25,7 +25,13 @@ module Plister
     end
 
     def paths
-      @paths ||= types.map { |type, path| [type, Dir["#{path}/*.plist"]] }.to_h
+      @paths ||= begin
+        paths = {}
+        # Note: We can't use to_h here because OS X ships with Ruby 2.0.x
+        # which doesn't have the Array#to_h method
+        types.each { |type, path| paths[type] = Dir["#{path}/*.plist"] }
+        paths
+      end
     end
 
     def preferences
@@ -34,7 +40,10 @@ module Plister
         paths.each do |type, plist_paths|
           plists = plist_paths.map { |domain| Plist.new domain, type: type }
           plists.select!(&:readable?)
-          output[type.to_s] = plists.map { |p| [p.domain, p.to_h] }.to_h
+          # Note: We can't use to_h here because OS X ships with Ruby 2.0.x
+          # which doesn't have the Array#to_h method
+          output[type.to_s] ||= {}
+          plists.each { |p| output[type.to_s][p.domain] = p.to_h }
         end
         output
       end
