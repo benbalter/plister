@@ -11,6 +11,10 @@ module Plister
         domains.each do |domain, prefs|
           puts "Setting #{type} preferences for #{domain}" if verbose
           plist = Plist.new(domain, type: type)
+          unless plist.exists?
+            puts "WARNING: Skipping #{domain} because it doesn't exist"
+            next
+          end
           plist.merge(prefs)
           plist.write
         end
