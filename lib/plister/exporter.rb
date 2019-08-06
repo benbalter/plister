@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Plister
   class Exporter
     attr_reader :path
@@ -19,8 +21,8 @@ module Plister
     def types
       @types ||= {
         system: '/Library/Preferences',
-        user:   "/Users/#{Plister.user}/Library/Preferences",
-        host:   "/Users/#{Plister.user}/Library/preferences/ByHost"
+        user: "/Users/#{Plister.user}/Library/Preferences",
+        host: "/Users/#{Plister.user}/Library/preferences/ByHost"
       }
     end
 

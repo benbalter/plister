@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Plister
   class Preferences
     attr_reader :path

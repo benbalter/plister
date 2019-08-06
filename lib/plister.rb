@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'cfpropertylist'
 require 'deep_merge'
 require 'psych'
@@ -17,6 +19,7 @@ module Plister
       @user ||= begin
         user = `whoami`.strip
         return user unless user == 'root'
+
         `logname`.strip
       end
     end

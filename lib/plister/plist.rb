@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Plister
   class Plist
     attr_accessor :domain, :type
-    TYPES = %w(user system host).freeze
+    TYPES = %w[user system host].freeze
 
     def initialize(domain, type: 'user')
       @domain = normalize_domain(domain)
@@ -28,6 +30,7 @@ module Plister
 
     def write
       raise IOError, "#{path} is not writable by #{Plister.user}" unless writable?
+
       list.save
     end
 
@@ -61,6 +64,7 @@ module Plister
     def list
       raise IOError, "#{path} does not exist" unless exists?
       raise IOError, "#{path} is not readable by #{Plister.user}" unless readable?
+
       @list ||= CFPropertyList::List.new file: path
     end
 
